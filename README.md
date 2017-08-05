@@ -12,4 +12,9 @@ To print out a reflection of standard input:
 
 To print out a file or multiple files
 
-	dog [File 1] [File 2] ...
+	dog [Flags] File 1 [File 2] ...
+
+The following flags are accepted:
+
+* -n: Show lines numbers
+* -c: Show word count underneath each file
