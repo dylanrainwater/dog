@@ -2,6 +2,8 @@
 #include <string>
 #include <fstream>
 #include <iomanip>
+#include <map>
+#include <sstream>
 
 int number_line_flag = 0; /* Determines whether or not to display line numbers */
 int word_count_flag  = 0; /* Determines whether or not to display word count */
@@ -19,14 +21,32 @@ void output_files(int start_index, int num_files, char** file_names) {
         std::string line;
 
         if (to_read.is_open()) {
+            std::map<std::string, int> word_count = std::map<std::string, int>();
             int line_number = 1;
             while (std::getline(to_read, line)) {
                 if (number_line_flag) {
                     std::cout << std::setw(4) << line_number++ << " ";
                 }
+                if (word_count_flag) {
+                    std::stringstream ss(line);
+                    std::string word;
+                    while (ss >> word) {
+                        if (word_count.find(word) == word_count.end()) {
+                            word_count[word] = 1;
+                        } else {
+                            word_count[word]++;
+                        }
+                    }
+                }
                 std::cout << line << std::endl;
             }
             to_read.close();
+            if (word_count_flag) {
+                std::cout << std::endl << "Word Count: " << std::endl;
+                for (auto& wc : word_count) {
+                    std::cout << wc.first << ": " << wc.second << std::endl;
+                }
+            }
         } else {
             std::cout << "dog: " << file_names[i] << ": No such file or directory" << std::endl;
         }
