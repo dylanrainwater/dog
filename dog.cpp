@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <iomanip>
 
 int number_line_flag = 0; /* Determines whether or not to display line numbers */
 int word_count_flag  = 0; /* Determines whether or not to display word count */
@@ -18,7 +19,11 @@ void output_files(int start_index, int num_files, char** file_names) {
         std::string line;
 
         if (to_read.is_open()) {
+            int line_number = 1;
             while (std::getline(to_read, line)) {
+                if (number_line_flag) {
+                    std::cout << std::setw(4) << line_number++ << " ";
+                }
                 std::cout << line << std::endl;
             }
             to_read.close();
