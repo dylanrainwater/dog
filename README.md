@@ -1,7 +1,7 @@
 # dog
 An alternative to `cat`.
 
-![Example usage of dog and comparison to cat.](media/example.png)
+![Example usage of dog and comparison to cat.](media/demo.gif)
 
 # Usage
 
